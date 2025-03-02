@@ -14,6 +14,17 @@
 
 // human vs human, nex implement easy ai, next next impossible ai
 
+const winningConditions = [
+  [0, 1, 2],
+  [3, 4, 5],
+  [6, 7, 8],
+  [0, 3, 6],
+  [1, 4, 7],
+  [2, 5, 8],
+  [0, 4, 8],
+  [2, 4, 6],
+];
+
 const form = document.querySelector("#myForm");
 
 form.addEventListener("submit", (event) => {
@@ -55,24 +66,29 @@ const initializeGame = (data) => {
 };
 
 const playMove = (box, data) => {
-    // is game over? If game over, don't do anything
-    if (data.gameOver || data.round > 8) {
-        return;
-    }
+  // is game over? If game over, don't do anything
+  if (data.gameOver || data.round > 8) {
+    return;
+  }
 
-    // check if game box has a letter in it, if so, don't do anything
-    if (data.board[box.id] === "X" || data.board[box.id] === "O") {
-        return;
-    }
+  // check if game box has a letter in it, if so, don't do anything
+  if (data.board[box.id] === "X" || data.board[box.id] === "O") {
+    return;
+  }
 
-    // adjust the DOM for player move, and then check win conditions
-    data.board[box.id] = data.currentPlayer;
-    box.textContent = data.currentPlayer;
-    box.classList.add(data.currentPlayer === "X" ? "player1" : "player2");
+  // adjust the DOM for player move, and then check win conditions
+  data.board[box.id] = data.currentPlayer;
+  box.textContent = data.currentPlayer;
+  box.classList.add(data.currentPlayer === "X" ? "player1" : "player2");
 
-    // increase the round #
-    data.round++;
-    console.log(box, data);
-    
-    // check 
+  // increase the round #
+  data.round++;
+  console.log(box, data);
+
+  // check end conditions
+  if (endConditions(data)) {
+    // adjust dom to reflect endconditions
+  }
 };
+
+// const endConditions =
